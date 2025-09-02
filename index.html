@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Pernikahan Dewi & Muja</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .kaligrafi {
+      font-family: 'Great Vibes', cursive;
+    }
+  </style>
+</head>
+<body class="bg-rose-50 text-gray-800">
+
+  <!-- Hero Section -->
+  <section class="relative h-screen bg-cover bg-center mt-6" style="background-image: url('foto kk dewi.jpg');">
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6">
+
+      <p class="text-sm uppercase tracking-widest text-gray-200 mb-2 animate">The Wedding Of</p>
+      <h1 class="text-5xl font-semibold mb-4 kaligrafi animate">Dewi & Muja</h1>
+      <p class="text-lg max-w-xl animate">
+        Dengan penuh rasa syukur kepada Allah SWT,  
+        kami bermaksud mengundang Bapak/Ibu/Saudara/i  
+        untuk menghadiri pernikahan putra-putri kami.
+      </p>
+    </div>
+  </section>
+
+  <!-- Foto Polaroid -->
+  <section class="py-16 flex justify-center">
+    <div class="bg-white shadow-xl rounded-2xl p-4 transform rotate-2 hover:rotate-0 transition">
+      <img src="foto kk.jpg" alt="Foto Mempelai" class="rounded-xl w-72">
+      <p class="text-center mt-2 text-sm">Dewi & Muja</p>
+    </div>
+  </section>
+
+  <!-- Nama Pengantin -->
+  <section class="py-12 text-center px-6">
+    <h2 class="text-4xl font-semibold mb-4 animate">Dewi & Muja</h2>
+    <p class="max-w-2xl mx-auto text-gray-600 animate">
+      Dengan segala kerendahan hati, kami berharap Bapak/Ibu/Saudara/i berkenan hadir 
+      untuk memberikan doa restu pada acara bahagia kami.
+    </p>
+  </section>
+
+  <!-- Detail Acara -->
+  <section class="bg-emerald-50">
+    <div class="max-w-4xl mx-auto px-6">
+      <!-- Grid Akad dan Resepsi -->
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Akad -->
+        <div class="p-6 bg-gray-100 rounded-2xl shadow animate text-center">
+          <h3 class="text-2xl font-semibold mb-2">Akad Nikah</h3>
+          <p>Sabtu, 11 September 2025</p>
+          <p>09.00 WIB</p>
+          <p>Di kediaman mempelai wanita</p>
+        </div>
+  
+        <!-- Resepsi -->
+        <div class="p-6 bg-gray-100 rounded-2xl shadow animate text-center">
+          <h3 class="text-2xl font-semibold mb-2">Resepsi</h3>
+          <p>Sabtu, 11 September 2025</p>
+          <p>09.00 WIB - Selesai</p>
+          <p>Di kediaman mempelai wanita</p>
+        </div>
+      </div>
+  
+      <!-- Tombol Google Maps di tengah -->
+      <div class="text-center mt-10 animate">
+        <a href="https://maps.app.goo.gl/KoyjvhWdQXvnjsrN8" target="_blank"
+           class="inline-block px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition shadow-lg">
+          📍 Lihat Lokasi di Google Maps
+        </a>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Countdown -->
+  <section class="py-16 text-center bg-emerald-50">
+    <h3 class="text-3xl font-semibold mb-6">Menuju Hari Bahagia</h3>
+    <div id="countdown" class="flex justify-center gap-6 text-xl font-semibold text-gray-700"></div>
+  </section>
+
+  <!-- Doa & Ucapan -->
+  <section class="py-16 bg-emerald-50 text-center px-6 relative">
+   
+    <h3 class="text-3xl font-semibold mb-6 animate">Doa & Ucapan</h3>
+    <p class="max-w-2xl mx-auto text-gray-600 animate">
+      Kehadiran dan doa restu Bapak/Ibu/Saudara/i merupakan kebahagiaan dan kehormatan besar bagi kami.
+    </p>
+
+  <!-- Footer -->
+  <footer class="py-8 text-center text-sm text-gray-500">
+    © 2025 Dewi & Muja Wedding. All Rights Reserved.  
+    <br />
+    DESIGN BY NABIL.
+  </footer>
+
+  <!-- Script -->
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.utils.toArray('.animate').forEach(el => {
+      gsap.fromTo(el, 
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: "power2.out", 
+          scrollTrigger: { trigger: el, start: "top 80%" }
+        }
+      );
+    });
+
+    // Countdown
+    const targetDate = new Date("sep 11, 2025 09:00:00").getTime();
+    const countdownEl = document.getElementById("countdown");
+
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        countdownEl.innerHTML = "Acara telah berlangsung";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownEl.innerHTML = `
+        <div>${days} <span class="block text-sm">Hari</span></div>
+        <div>${hours} <span class="block text-sm">Jam</span></div>
+        <div>${minutes} <span class="block text-sm">Menit</span></div>
+        <div>${seconds} <span class="block text-sm">Detik</span></div>
+      `;
+    }, 1000);
+  </script>
+
+<script>
+    const numberOfLeaves = 15;
+  
+    for (let i = 0; i < numberOfLeaves; i++) {
+      const leaf = document.createElement("img");
+      leaf.src = "daun/leaf.png"; // Ganti sesuai lokasi file
+      leaf.classList.add("falling-leaf");
+      leaf.style.left = Math.random() * 100 + "vw";
+      leaf.style.animationDelay = Math.random() * 10 + "s";
+      leaf.style.width = (30 + Math.random() * 20) + "px";
+  
+      document.body.appendChild(leaf);
+    }
+  </script>
+
+<style>
+    .falling-leaf {
+      position: fixed;
+      top: -50px;
+      z-index: 1;
+      animation: fall 10s linear infinite;
+      pointer-events: none;
+      opacity: 0.8;
+    }
+  
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+  
+ 
+</body>
+</html>
