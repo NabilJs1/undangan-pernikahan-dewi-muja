@@ -1,9 +1,25 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Undangan Pernikahan Dewi & Muja</title>
+  <title>undangan pernikahan dewi & Muja</title>
+
+<!-- Layar Pembuka -->
+<div id="openingScreen" 
+     class="fixed inset-0 bg-rose-100 flex flex-col items-center justify-center text-center z-50 transition-opacity duration-1000 opacity-100">
+     
+  <h1 class="text-4xl kaligrafi text-rose-700 mb-6">Dewi & Muja</h1>
+  <p class="text-gray-700 mb-6">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+  <button id="openInvitationBtn" 
+          class="px-6 py-3 bg-rose-600 text-white rounded-full shadow hover:bg-rose-700 transition">
+    📖 Buka Undangan
+  </button>
+</div>
+
+<audio id="weddingMusic" loop>
+  <source src="musik/Wedding Nasheed.mp3" type="audio/mpeg">
+  Browser Anda tidak mendukung audio.
+</audio>
+
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -23,6 +39,18 @@
     .kaligrafi {
       font-family: 'Great Vibes', cursive;
     }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('ornamen/bunga.png') repeat;
+      background-size: 150px 150px;
+      opacity: 0.1;
+      pointer-events: none;
+      z-index: 0;
+    }
+
   </style>
 </head>
 <body class="bg-rose-50 text-gray-800">
@@ -67,7 +95,7 @@
         <!-- Akad -->
         <div class="p-6 bg-gray-100 rounded-2xl shadow animate text-center">
           <h3 class="text-2xl font-semibold mb-2">Akad Nikah</h3>
-          <p>Sabtu, 11 September 2025</p>
+          <p>Kamis, 11 September 2025</p>
           <p>09.00 WIB</p>
           <p>Di kediaman mempelai wanita</p>
         </div>
@@ -75,8 +103,8 @@
         <!-- Resepsi -->
         <div class="p-6 bg-gray-100 rounded-2xl shadow animate text-center">
           <h3 class="text-2xl font-semibold mb-2">Resepsi</h3>
-          <p>Sabtu, 11 September 2025</p>
-          <p>09.00 WIB - Selesai</p>
+          <p>Kamis, 11 September 2025</p>
+          <p>11.00 WIB - Selesai</p>
           <p>Di kediaman mempelai wanita</p>
         </div>
       </div>
@@ -190,6 +218,30 @@
     }
   </style>
   
- 
+<script>
+  const openBtn = document.getElementById('openInvitationBtn');
+  const openingScreen = document.getElementById('openingScreen');
+  const music = document.getElementById('weddingMusic');
+
+  openBtn.addEventListener('click', () => {
+    // Tambahkan class opacity-0 agar fade out
+    openingScreen.classList.add('opacity-0');
+
+    // Setelah 1 detik (sesuai durasi), sembunyikan elemen
+    setTimeout(() => {
+      openingScreen.style.display = 'none';
+    }, 5000);
+
+    music.currnetTime = 28;
+   
+    // Mainkan musik
+    music.play().catch(() => {
+      alert("Klik sekali lagi untuk memulai musik karena aturan browser.");
+    });
+  });
+  music.load(loadedmetadata);
+</script>
+
+
 </body>
 </html>
